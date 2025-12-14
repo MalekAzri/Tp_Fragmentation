@@ -47,6 +47,7 @@ ip-fragmentation-simulation/
 │
 ├── ipv4_fragmentation.py
 ├── ipv6_fragmentation.py
+├── packet_analysis.py
 └── README.md
 ```
 
@@ -143,9 +144,38 @@ sudo python3 ipv6_fragmentation.py
 
 Observation :
 - Plusieurs fragments IPv6 avec Extension Header Fragment (Next Header=44).
+---
 
+## Analyse des résultats avec `packet_analysis.py` 
 
-## 📌 Ce qui a été simulé
+Ce script Python utilise Scapy pour capturer et analyser les paquets en temps réel, en détectant la fragmentation IPv4/IPv6.
+
+### Utilisation
+
+**Pour analyser IPv4 :**
+
+```bash
+sudo python3 packet_analysis.py ipv4 [interface]
+```
+
+**Pour analyser IPv6 :**
+
+```bash
+sudo python3 packet_analysis.py ipv6 [interface]
+```
+
+Exemple : `sudo python3 packet_analysis.py ipv4 eth0`
+
+Le script affiche :
+- Adresses source/destination
+- Taille du paquet
+- Champs de fragmentation (ID, flags, offset pour IPv4 ; Fragment Header pour IPv6)
+- Détection de fragments
+
+Utile pour une analyse programmatique des captures, complémentaire à tcpdump/Wireshark.
+
+---
+## Ce qui a été simulé
 
 - IPv4 fragmenté **dans les deux sens** (Windows ⇄ Ubuntu)
 - IPv4 avec et sans **Don't Fragment (DF)**
